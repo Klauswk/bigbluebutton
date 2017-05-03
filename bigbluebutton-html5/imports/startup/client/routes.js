@@ -7,6 +7,7 @@ import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
 import ChatContainer from '/imports/ui/components/chat/container';
+import CustomChatContainer from '/imports/ui/components/custom-chat/container';
 import UserListContainer from '/imports/ui/components/user-list/container';
 
 const browserHistory = useRouterHistory(createHistory)({
@@ -19,15 +20,35 @@ export const renderRoutes = () => (
     <Route path="/join/:meetingID/:userID/:authToken"
       component={LoadingScreen} onEnter={joinRouteHandler} />
     <Route path="/" component={Base} onEnter={authenticatedRouteHandler} >
+      <IndexRoute components={{
+        media: CustomChatContainer,
+        actionsbar: null,
+      }} />
+      <Route name="users" path="users" components={
+        {
+          userList: UserListContainer,
+          media: CustomChatContainer,
+          actionsbar: null,
+        }
+      } />
+      <Route name="chat" path="users/chat/:chatID" components={{
+        userList: UserListContainer,
+        media: ChatContainer,
+        actionsbar: null,
+      }} />
+      <Redirect from="users/chat" to="/users/chat/public" />
+    </Route>
+
+    <Route path="/chat-only" component={Base} onEnter={authenticatedRouteHandler} >
       <IndexRoute components={{}} />
       <Route name="users" path="users" components={{ userList: UserListContainer }} />
       <Route name="chat" path="users/chat/:chatID" components={{
         userList: UserListContainer,
         chat: ChatContainer,
       }} />
-      <Redirect from="users/chat" to="/users/chat/public" />
+
     </Route>
-    <Route name="error" path="/error/:errorCode" component={Base}/>
+    <Route name="error" path="/error/:errorCode" component={Base} />
     <Redirect from="*" to="/error/404" />
   </Router>
 );
