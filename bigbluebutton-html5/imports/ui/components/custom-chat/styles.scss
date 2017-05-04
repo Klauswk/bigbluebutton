@@ -25,7 +25,7 @@
 
 .title {
   @extend %text-elipsis;
-  width: 90%;
+  width: 100%;
 
   > [class^="icon-bbb-"],
   > [class*=" icon-bbb-"] {

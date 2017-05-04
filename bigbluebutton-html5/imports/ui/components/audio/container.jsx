@@ -23,7 +23,7 @@ export default withModalMounter(createContainer(({ mountModal }) => {
     init: () => {
       Service.init();
 
-      if (APP_CONFIG.autoJoinAudio) {
+      if (APP_CONFIG.autoJoinAudio && !APP_CONFIG.chatOnly) {
         mountModal(<AudioModal handleJoinListenOnly={Service.joinListenOnly} />);
       }
     },
