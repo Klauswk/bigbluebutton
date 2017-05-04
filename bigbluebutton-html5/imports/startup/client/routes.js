@@ -6,7 +6,6 @@ import { joinRouteHandler, logoutRouteHandler, authenticatedRouteHandler } from 
 import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
-import ChatContainer from '/imports/ui/components/chat/container';
 import CustomChatContainer from '/imports/ui/components/custom-chat/container';
 import ChatOnlyNavbarContainer from '/imports/ui/components/chat-only-nav-bar/container';
 import UserListContainer from '/imports/ui/components/user-list/container';
@@ -23,14 +22,14 @@ export const renderRoutes = () => (
     <Route path="/" component={Base} onEnter={authenticatedRouteHandler} >
       <IndexRoute components={{
         userList: UserListContainer,
-          media: null,
+        media: CustomChatContainer,
         actionsbar: null,
         navbar: ChatOnlyNavbarContainer,
       }} />
       <Route name="users" path="users" components={
         {
           userList: UserListContainer,
-          media: null,
+          media: CustomChatContainer,
           actionsbar: null,
           navbar: ChatOnlyNavbarContainer,
         }

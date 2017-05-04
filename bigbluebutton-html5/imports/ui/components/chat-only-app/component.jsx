@@ -118,6 +118,7 @@ class ChatOnlyApp extends Component {
   renderChat() {
     const { media, intl } = this.props;
     if (!media) return null;
+    if(window.location.pathname.indexOf("chat") == -1) return null;
 
     return (
       <section
