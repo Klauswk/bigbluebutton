@@ -22,14 +22,15 @@ export const renderRoutes = () => (
       component={LoadingScreen} onEnter={joinRouteHandler} />
     <Route path="/" component={Base} onEnter={authenticatedRouteHandler} >
       <IndexRoute components={{
-        media: CustomChatContainer,
+        userList: UserListContainer,
+          media: null,
         actionsbar: null,
         navbar: ChatOnlyNavbarContainer,
       }} />
       <Route name="users" path="users" components={
         {
           userList: UserListContainer,
-          media: CustomChatContainer,
+          media: null,
           actionsbar: null,
           navbar: ChatOnlyNavbarContainer,
         }

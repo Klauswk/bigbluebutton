@@ -6,6 +6,7 @@ import IntlStartup from './intl';
 import Auth from '/imports/ui/services/auth';
 
 import AppContainer from '/imports/ui/components/app/container';
+import ChatOnlyAppContainer from '/imports/ui/components/chat-only-app/container';
 import ErrorScreen from '/imports/ui/components/error-screen/component';
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
 import Settings from '/imports/ui/services/settings';
@@ -53,6 +54,9 @@ class Base extends Component {
       return (<LoadingScreen>{loading}</LoadingScreen>);
     }
 
+    if(Meteor.settings.public.app.chatOnly){
+      return (<ChatOnlyAppContainer {...this.props} baseControls={stateControls}/>);
+    }
     return (<AppContainer {...this.props} baseControls={stateControls}/>);
   }
 

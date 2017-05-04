@@ -45,19 +45,29 @@ const defaultProps = {
   fontSize: '16px',
 };
 
-class App extends Component {
+class ChatOnlyApp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       compactUserList: false, //TODO: Change this on userlist resize (?)
+      width: window.innerWidth
     };
 
     props.init.call(this);
   }
 
+  updateDimensions() {
+    this.setState({ width: window.innerWidth});
+  }
+
   componentDidMount() {
     document.getElementsByTagName('html')[0].style.fontSize = this.props.fontSize;
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
   renderNavBar() {
@@ -100,29 +110,27 @@ class App extends Component {
       <nav
         className={cx(styles.userList, userListStyle)}
         aria-label={intl.formatMessage(intlMessages.userListLabel)}>
-          {userList}
+        {userList}
       </nav>
     );
   }
 
   renderChat() {
-    const { chat, intl } = this.props;
-
-    if (!chat) return null;
+    const { media, intl } = this.props;
+    if (!media) return null;
 
     return (
       <section
         className={styles.chat}
         role="region"
         aria-label={intl.formatMessage(intlMessages.chatLabel)}>
-          {chat}
+        {media}
       </section>
     );
   }
-  
+
   renderMedia() {
     const { media, intl } = this.props;
-
     if (!media) return null;
 
     return (
@@ -130,7 +138,7 @@ class App extends Component {
         className={styles.media}
         role="region"
         aria-label={intl.formatMessage(intlMessages.mediaLabel)}>
-          {media}
+        {media}
       </section>
     );
   }
@@ -145,7 +153,7 @@ class App extends Component {
         className={styles.actionsbar}
         role="region"
         aria-label={intl.formatMessage(intlMessages.actionsbarLabel)}>
-          {actionsbar}
+        {actionsbar}
       </section>
     );
   }
@@ -159,10 +167,10 @@ class App extends Component {
         <NotificationsBarContainer />
         <section className={styles.wrapper}>
           {this.renderUserList()}
-          {this.renderChat()}
+          {window.innerWidth > 600 ? null : this.renderChat()}
           <div className={styles.content}>
             {this.renderNavBar()}
-            {this.renderMedia()}
+            {window.innerWidth < 600 ? null : this.renderMedia()}
             {this.renderActionsBar()}
           </div>
           {this.renderSidebar()}
@@ -175,6 +183,6 @@ class App extends Component {
   }
 }
 
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
-export default injectIntl(App);
+ChatOnlyApp.propTypes = propTypes;
+ChatOnlyApp.defaultProps = defaultProps;
+export default injectIntl(ChatOnlyApp);
