@@ -6,8 +6,8 @@ import { joinRouteHandler, logoutRouteHandler, authenticatedRouteHandler } from 
 import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
-import ChatContainer from '/imports/ui/components/chat/container';
-import UserListContainer from '/imports/ui/components/user-list/container';
+import PollOnlyNavBar from '/imports/ui/components/poll-only-nav-bar/container';
+import PollWaiting from '/imports/ui/components/poll-waiting/component';
 
 const browserHistory = useRouterHistory(createHistory)({
   basename: Meteor.settings.public.app.basename,
@@ -19,13 +19,11 @@ export const renderRoutes = () => (
     <Route path="/join/:meetingID/:userID/:authToken"
       component={LoadingScreen} onEnter={joinRouteHandler} />
     <Route path="/" component={Base} onEnter={authenticatedRouteHandler} >
-      <IndexRoute components={{}} />
-      <Route name="users" path="users" components={{ userList: UserListContainer }} />
-      <Route name="chat" path="users/chat/:chatID" components={{
-        userList: UserListContainer,
-        chat: ChatContainer,
+      <IndexRoute components={{
+        navbar: PollOnlyNavBar,
+        media:PollWaiting,
+        actionsbar:null
       }} />
-      <Redirect from="users/chat" to="/users/chat/public" />
     </Route>
     <Route name="error" path="/error/:errorCode" component={Base}/>
     <Redirect from="*" to="/error/404" />

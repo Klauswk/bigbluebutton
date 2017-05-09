@@ -75,7 +75,7 @@ export default withRouter(injectIntl(withModalMounter(createContainer((
     const APP_CONFIG = Meteor.settings.public.app;
 
     const init = () => {
-      if (APP_CONFIG.autoJoinAudio) {
+      if (APP_CONFIG.autoJoinAudio  && !APP_CONFIG.pollOnly) {
         mountModal(<AudioModalContainer />);
       }
     };
