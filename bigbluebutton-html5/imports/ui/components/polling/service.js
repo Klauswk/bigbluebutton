@@ -7,8 +7,9 @@ let mapPolls = function () {
   let poll = Polls.findOne();
 
   if (!poll) {
+    pollVoted = false;
     return { pollExists: false, pollVoted, publish: false };
-  }else if(!poll.publish && pollVoted){
+  }else if(!poll.publish && pollVoted && poll.poll.num_responders){
     return { pollExists: false, pollVoted,  publish: false };
   }else if(poll.publish){
     return { pollExists: false, pollVoted,  publish: true };
