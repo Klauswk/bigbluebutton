@@ -18,7 +18,6 @@ Meteor.publish('polls', function(credentials) {
 
   const selector = {
     meetingId: meetingId,
-    users: requesterUserId,
   };
 
   let options = {};
@@ -28,7 +27,7 @@ Meteor.publish('polls', function(credentials) {
       fields: {
         'poll.answers.num_votes': 0,
       },
-    };
+    }
   }
 
   return Polls.find(selector, options);

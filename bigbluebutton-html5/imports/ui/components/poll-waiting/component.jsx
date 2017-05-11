@@ -4,20 +4,13 @@ import Icon from '/imports/ui/components/icon/component'
 import styles from './styles.scss';
 import { defineMessages, injectIntl } from 'react-intl';
 
-const intlMessages = defineMessages({
-  waitingLabel: {
-    id: 'app.poll.waiting.label',
-    defaultMessage: 'Waiting for poll to begin',
-  },
-});
-
 class PollingWaiting extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { intl } = this.props;
+    const { label } = this.props;
 
     return (
       <div className={styles.content}>
@@ -25,7 +18,7 @@ class PollingWaiting extends React.Component {
           <div className={styles.message}>
             <Icon className={styles.icon} iconName="polling" />
           </div>
-          <i className={styles.message}>{intl.formatMessage(intlMessages.waitingLabel)}</i>
+          <i className={styles.message}>{label}</i>
           <div className={styles.spinner}>
             <div className={styles.bounce1}></div>
             <div className={styles.bounce2}></div>
@@ -37,4 +30,4 @@ class PollingWaiting extends React.Component {
   }
 };
 
-export default injectIntl(PollingWaiting);
+export default PollingWaiting;

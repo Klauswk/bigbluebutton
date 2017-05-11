@@ -1,5 +1,6 @@
 import { check } from 'meteor/check';
 import addPoll from '../modifiers/addPoll';
+import clearPolls from '../modifiers/clearPolls';
 
 export default function pollStarted({ payload }) {
   check(payload, Object);
@@ -12,5 +13,6 @@ export default function pollStarted({ payload }) {
   check(requesterId, String);
   check(poll, Object);
 
+  clearPolls(meetingId);
   return addPoll(meetingId, requesterId, poll);
 }

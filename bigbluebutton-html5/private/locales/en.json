@@ -198,5 +198,6 @@
   "app.error.401": "Unauthorized",
   "app.error.403": "Forbidden",
   "app.error.leaveLabel": "Log in again",
-  "app.poll.waiting.label": "Waiting for poll to begin"
+  "app.pollWaiting.waitingPollLabel": "Waiting for poll to begin",
+  "app.pollWaiting.waitingPollResultLabel": "Waiting for the pull results"
 }

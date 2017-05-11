@@ -7,7 +7,7 @@ import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
 import PollOnlyNavBar from '/imports/ui/components/poll-only-nav-bar/container';
-import PollWaiting from '/imports/ui/components/poll-waiting/component';
+import PollContainer from '/imports/ui/components/poll-only-app/container.jsx';
 
 const browserHistory = useRouterHistory(createHistory)({
   basename: Meteor.settings.public.app.basename,
@@ -21,7 +21,7 @@ export const renderRoutes = () => (
     <Route path="/" component={Base} onEnter={authenticatedRouteHandler} >
       <IndexRoute components={{
         navbar: PollOnlyNavBar,
-        media:PollWaiting,
+        media: PollContainer,
         actionsbar:null
       }} />
     </Route>

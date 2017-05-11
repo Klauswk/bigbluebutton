@@ -35,6 +35,7 @@ export default function addPoll(meetingId, requesterId, poll) {
     poll,
     requester: requesterId,
     users: userIds,
+    publish: false,
   };
 
   const cb = (err, numChanged) => {
