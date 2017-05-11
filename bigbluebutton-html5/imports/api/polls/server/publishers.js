@@ -22,13 +22,5 @@ Meteor.publish('polls', function(credentials) {
 
   let options = {};
 
-  if (!isAllowedTo('subscribeAnswers', credentials)) {
-    options = {
-      fields: {
-        'poll.answers.num_votes': 0,
-      },
-    }
-  }
-
   return Polls.find(selector, options);
 });

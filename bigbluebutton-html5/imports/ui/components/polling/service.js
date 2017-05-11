@@ -8,11 +8,11 @@ let mapPolls = function () {
 
   if (!poll) {
     pollVoted = false;
-    return { pollExists: false, pollVoted, publish: false };
+    return {pollExists: false};
   }else if(!poll.publish && pollVoted && poll.poll.num_responders){
-    return { pollExists: false, pollVoted,  publish: false };
+    return {pollExists: false, pollVoted,  publish: false };
   }else if(poll.publish){
-    return { pollExists: false, pollVoted,  publish: true };
+    return {poll: poll.poll, pollExists: false, publish: true };
   }
 
   const amIRequester = poll.requester != 'userId';

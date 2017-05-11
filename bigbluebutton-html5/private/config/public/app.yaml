@@ -7,6 +7,8 @@ app:
   # Audio notification for unread chat message
   audioChatNotification: false
 
+  pollOnly: true
+
   # Will offer the user to join the audio when entering the meeting
   autoJoinAudio: true
   listenOnly: false

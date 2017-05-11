@@ -199,5 +199,6 @@
   "app.error.403": "Forbidden",
   "app.error.leaveLabel": "Log in again",
   "app.pollWaiting.waitingPollLabel": "Waiting for poll to begin",
-  "app.pollWaiting.waitingPollResultLabel": "Waiting for the pull results"
+  "app.pollWaiting.waitingPollResultLabel": "Waiting for the pull results",
+  "app.pollResult.title":"Polling Result"
 }

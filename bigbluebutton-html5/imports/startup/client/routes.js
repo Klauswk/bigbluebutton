@@ -6,7 +6,7 @@ import { joinRouteHandler, logoutRouteHandler, authenticatedRouteHandler } from 
 import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
-import PollOnlyNavBar from '/imports/ui/components/poll-only-nav-bar/container';
+import PollOnlyNavBar from '/imports/ui/components/poll-only-app/nav-bar/container';
 import PollContainer from '/imports/ui/components/poll-only-app/container.jsx';
 
 const browserHistory = useRouterHistory(createHistory)({

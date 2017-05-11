@@ -1,0 +1,35 @@
+@import "../../../stylesheets/variables/_all";
+@import '../../../stylesheets/variables/palette';
+
+.message {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+  padding-top: 80px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
+    transition: 0.3s;
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+
+
+  @include mq($small-only) {
+    margin : 20px;
+  }
+
+  @include mq($medium-up) {
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+  @include mq($xlarge-up) {
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+}

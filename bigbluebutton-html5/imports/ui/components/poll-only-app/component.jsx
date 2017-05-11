@@ -31,9 +31,6 @@ class PollingComponent extends React.Component {
     const poll = this.props.poll;
     const calculatedStyles = this.getStyles();
     const { intl } = this.props;
-
-
-    console.log("poll",poll);
     
     return (
       <div >
