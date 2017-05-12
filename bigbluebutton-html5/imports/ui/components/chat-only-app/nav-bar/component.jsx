@@ -4,6 +4,7 @@ import cx from 'classnames';
 import styles from './styles.scss';
 import Button from '/imports/ui/components/button/component';
 import RecordingIndicator from './recording-indicator/component';
+import SettingsDropdownContainer from './settings-dropdown/container';
 import Icon from '/imports/ui/components/icon/component';
 import BreakoutJoinConfirmation from '/imports/ui/components/breakout-join-confirmation/component';
 import Dropdown from '/imports/ui/components/dropdown/component';
@@ -100,6 +101,9 @@ class ChatOnlyNavbar extends Component {
         <div className={styles.center} role="banner">
           {this.renderPresentationTitle()}
           <RecordingIndicator beingRecorded={beingRecorded}/>
+        </div>
+        <div className={styles.right}>
+          <SettingsDropdownContainer />
         </div>
       </div>
     );
