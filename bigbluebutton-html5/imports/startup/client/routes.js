@@ -6,8 +6,8 @@ import { joinRouteHandler, logoutRouteHandler, authenticatedRouteHandler } from 
 import Base from './base';
 
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
-import CustomChatContainer from '/imports/ui/components/custom-chat/container';
-import ChatOnlyNavbarContainer from '/imports/ui/components/chat-only-nav-bar/container';
+import CustomChatContainer from '/imports/ui/components/chat-only-app/chat/container';
+import ChatOnlyNavbarContainer from '/imports/ui/components/chat-only-app/nav-bar/container';
 import UserListContainer from '/imports/ui/components/user-list/container';
 
 const browserHistory = useRouterHistory(createHistory)({
