@@ -1,0 +1,21 @@
+acl:
+  viewer:
+    chatPublic:
+      write: true
+      read: true
+    presentation:
+      write: true
+      read: false
+  moderator:
+    chatPublic:
+      write: true
+      read: true
+    chatPrivate:
+      write: true
+      read: true
+    presentation:
+      write: true
+      read: false
+    lockSetting:
+      write: true
+      read: false
