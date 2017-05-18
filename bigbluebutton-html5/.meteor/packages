@@ -22,3 +22,5 @@ standard-minifier-js@1.2.2
 nathantreid:css-modules
 shell-server@0.2.2
 http@1.2.11
+practicalmeteor:mocha
+dispatch:mocha
