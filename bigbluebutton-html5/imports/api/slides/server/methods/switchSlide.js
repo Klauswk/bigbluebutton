@@ -3,7 +3,7 @@ import Slides from '/imports/api/slides';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import RedisPubSub from '/imports/startup/server/redis';
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 
 export default function switchSlide(credentials, slideNumber) {
   const REDIS_CONFIG = Meteor.settings.redis;
@@ -18,7 +18,7 @@ export default function switchSlide(credentials, slideNumber) {
   check(requesterToken, String);
   check(slideNumber, Number);
 
-  if (!isAllowedTo('switchSlide', credentials)) {
+  if (!Acl.isAllowedTo('presentation','write', credentials)) {
     throw new Meteor.Error('not-allowed', `You are not allowed to switchSlide`);
   }
 

@@ -1,13 +1,13 @@
 import { Meteor } from 'meteor/meteor';
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 import Polls from '/imports/api/polls';
 import { check } from 'meteor/check';
 import { logger } from '/imports/startup/server/logger';
 
 Meteor.publish('polls', function(credentials) {
   //checking if it is allowed to see Poll Collection in general
-  if (!isAllowedTo('subscribePoll', credentials)) {
-    this.error(new Meteor.Error(402, "The user was not authorized to subscribe for 'polls'"));
+  if (!Acl.isAllowedTo('poll','write', credentials) || !Acl.isAllowedTo('pollVote','write', credentials)) {
+    this.ready();
   }
 
   const { meetingId, requesterUserId, requesterToken } = credentials;
@@ -23,7 +23,7 @@ Meteor.publish('polls', function(credentials) {
 
   let options = {};
 
-  if (!isAllowedTo('subscribeAnswers', credentials)) {
+  if (!Acl.isAllowedTo('pollVote','write', credentials)) {
     options = {
       fields: {
         'poll.answers.num_votes': 0,

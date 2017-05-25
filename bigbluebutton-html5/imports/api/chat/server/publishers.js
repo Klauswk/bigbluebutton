@@ -2,11 +2,11 @@ import Chat from '/imports/api/chat';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Logger from '/imports/startup/server/logger';
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 
 Meteor.publish('chat', function(credentials) {
-  if (!isAllowedTo('subscribeChat', credentials)) {
-    this.error(new Meteor.Error(402, "The user was not authorized to subscribe for 'chats'"));
+  if (!Acl.isAllowedTo('chatPublic','read', credentials) && !Acl.isAllowedTo('chatPrivate','read', credentials)) {
+    this.ready();
   }
 
   const CHAT_CONFIG = Meteor.settings.public.chat;

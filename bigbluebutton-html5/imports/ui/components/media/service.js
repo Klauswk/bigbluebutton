@@ -1,6 +1,8 @@
 import Presentations from '/imports/api/presentations';
 import Slides from '/imports/api/slides';
 import { isVideoBroadcasting } from '../deskshare/service';
+import Auth from '/imports/ui/services/auth';
+import Acl from '/imports/startup/acl';
 
 let getPresentationInfo = () => {
   let currentPresentation;
@@ -15,7 +17,7 @@ let getPresentationInfo = () => {
 };
 
 function shouldShowWhiteboard() {
-  return true;
+  return Acl.isAllowedTo('whiteboard','read', Auth.credentials);
 }
 
 function shouldShowDeskshare() {

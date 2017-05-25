@@ -1,5 +1,7 @@
 const expect = require('expect.js');
-import { Acl } from '../Acl';
+import {
+  Acl
+} from '../Acl';
 
 describe('Acl Tests', function () {
 
@@ -56,7 +58,9 @@ const UsersViewer = {};
 
 UsersViewer.findOne = function () {
   return {
-    role: "viewer"
+    user: {
+      role: "viewer"
+    }
   };
 }
 
@@ -64,7 +68,9 @@ const UsersModerator = {};
 
 UsersModerator.findOne = function () {
   return {
-    role: "moderator"
+    user: {
+      role: "moderator"
+    }
   };
 }
 

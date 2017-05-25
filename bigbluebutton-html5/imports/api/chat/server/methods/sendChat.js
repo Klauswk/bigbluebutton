@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import Logger from '/imports/startup/server/logger';
 import RedisPubSub from '/imports/startup/server/redis';
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 import { translateHTML5ToFlash } from '/imports/api/common/server/helpers';
 import RegexWebUrl from '/imports/utils/regex-weburl';
 
@@ -53,8 +53,8 @@ export default function sendChat(credentials, message) {
     actionName = 'chatPublic';
   }
 
-  if (!isAllowedTo(actionName, credentials)
-    && message.from_userid !== requesterUserId) {
+  if (!Acl.isAllowedTo(actionName,credentials)
+    || message.from_userid !== requesterUserId) {
     throw new Meteor.Error('not-allowed', `You are not allowed to sendChat`);
   }
 

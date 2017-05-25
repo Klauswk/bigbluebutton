@@ -6,6 +6,8 @@ import Rectangle from '../shapes/rectangle/component.jsx';
 import Text from '../shapes/text/component.jsx';
 import Triangle from '../shapes/triangle/component.jsx';
 import Pencil from '../shapes/pencil/component.jsx';
+import Auth from '/imports/ui/services/auth';
+import Acl from '/imports/startup/acl';
 
 export default class WhiteboardShapeModel extends React.Component {
   constructor(props) {
@@ -14,6 +16,11 @@ export default class WhiteboardShapeModel extends React.Component {
 
   render() {
     let Component = this.props.shapes[this.props.shape.shape_type];
+    
+    if (this.props.shape.shape_type.indexOf("poll_result") > -1 && !Acl.isAllowedTo('pollVote','read', Auth.credentials)) {
+      return null;
+    }
+    
     if (Component != null) {
       return (
         <Component

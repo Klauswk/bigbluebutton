@@ -1,4 +1,4 @@
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 import RedisPubSub from '/imports/startup/server/redis';
 import { check } from 'meteor/check';
 import Polls from '/imports/api/polls';
@@ -9,7 +9,7 @@ export default function publishVote(credentials, pollId, pollAnswerId) { //TODO 
   const CHANNEL = REDIS_CONFIG.channels.toBBBApps.polling;
   const EVENT_NAME = 'vote_poll_user_request_message';
 
-  if (!isAllowedTo('subscribePoll', credentials)) {
+  if (!Acl.isAllowedTo('pollVote','write', credentials)) {
     throw new Meteor.Error('not-allowed', `You are not allowed to publishVote`);
   }
 

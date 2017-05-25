@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import RedisPubSub from '/imports/startup/server/redis';
 import Logger from '/imports/startup/server/logger';
-import { isAllowedTo } from '/imports/startup/server/userPermissions';
+import Acl from '/imports/startup/acl';
 import Meetings from '/imports/api/meetings';
 import Users from '/imports/api/users';
 
@@ -17,15 +17,14 @@ export default function listenOnlyToggle(credentials, isJoining = true) {
   check(isJoining, Boolean);
 
   let EVENT_NAME = undefined;
-
   if (isJoining) {
     EVENT_NAME = 'user_connected_to_global_audio';
-    if (!isAllowedTo('joinListenOnly', credentials)) {
+    if (!Acl.isAllowedTo('audio','read', credentials)) {
       throw new Meteor.Error('not-allowed', `You are not allowed to joinListenOnly`);
     }
   } else {
     EVENT_NAME = 'user_disconnected_from_global_audio';
-    if (!isAllowedTo('leaveListenOnly', credentials)) {
+    if (!Acl.isAllowedTo('audio','read', credentials)) {
       throw new Meteor.Error('not-allowed', `You are not allowed to leaveListenOnly`);
     }
   }

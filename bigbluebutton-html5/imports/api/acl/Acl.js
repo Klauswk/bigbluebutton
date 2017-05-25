@@ -15,8 +15,6 @@ export class Acl {
    * @param {object} Users 
    */
   constructor(aclConfig, Users) {
-    check(aclConfig, Object);
-
     this.Users = Users;
     this.aclConfig = aclConfig;
   }
@@ -28,7 +26,9 @@ export class Acl {
    * @return An boolean which inform if the action is allowed.
    */
   isAllowedTo(permissionName, actionName, credentials) {
-    check(credentials, Object);
+    if(!credentials){
+      return false;
+    }
     check(actionName, String);
     check(permissionName, String);
 
@@ -41,11 +41,11 @@ export class Acl {
       userId,
     });
 
-    if (!user.role) {
+    if (!user.user.role) {
       return false;
     }
 
-    let role = this.roleExist(this.aclConfig, user.role);
+    let role = this.roleExist(this.aclConfig, user.user.role);
 
     if (role) {
       return this.canPerformAction(permissionName, actionName, role);
@@ -88,6 +88,6 @@ export class Acl {
   roleExist(acl, userRole) {
     check(acl, Object);
     check(userRole, String);
-    return acl[userRole];
+    return acl[userRole.toLowerCase()];
   }
 }
