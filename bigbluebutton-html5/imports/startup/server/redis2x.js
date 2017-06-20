@@ -73,6 +73,7 @@ class RedisPubSub2x {
   }
 
   handleMessage(pattern, channel, parsedMessage) {
+    console.log("Message: ", parsedMessage);
     const eventName = parsedMessage.core.header.name;
 
     Logger.info(`2.0 QUEUE | PROGRESS ${this.queue.progress()}% | LENGTH ${this.queue.length()}} ${eventName}`);
