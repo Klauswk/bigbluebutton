@@ -117,8 +117,8 @@ public class XMLResponseConferenceListParser extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
 
         if(qName.equalsIgnoreCase("member")) {
-            //add it to the list
-            if(!tempFlags.isGhost()){
+            //add it to the list and ignore if the user is ghost
+            if(!tempFlags.getIsGhost()){
                 myConfrenceMembers.add(tempMember);
             }
         }else if(qName.equalsIgnoreCase("flags")) {
