@@ -118,7 +118,9 @@ public class XMLResponseConferenceListParser extends DefaultHandler {
 
         if(qName.equalsIgnoreCase("member")) {
             //add it to the list
-            myConfrenceMembers.add(tempMember);
+            if(!tempFlags.isGhost()){
+                myConfrenceMembers.add(tempMember);
+            }
         }else if(qName.equalsIgnoreCase("flags")) {
             tempMember.setFlags(tempFlags);
             inFlags = false;
@@ -127,6 +129,8 @@ public class XMLResponseConferenceListParser extends DefaultHandler {
                 tempFlags.setCanSpeak(tempVal);
             }else if (qName.equalsIgnoreCase("talking")) {
                 tempFlags.setTalking(tempVal);
+            }else if (qName.equalsIgnoreCase("is_ghost")) {
+                tempFlags.setGhost(tempVal);
             }
         }else if (qName.equalsIgnoreCase("id")) {
             try {
